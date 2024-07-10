@@ -396,3 +396,14 @@
 		RND_CATEGORY_AI + RND_SUBCATEGORY_AI_DANGEROUS_MODULES
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
+
+/datum/design/board/colony_guide_module
+	name = "Colony Guide AI Module"
+	desc = "Allows for the construction of a Colony Guide AI Core Module."
+	id = "colony_guide_module"
+	materials = list(/datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/diamond = SHEET_MATERIAL_AMOUNT, /datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT)
+	build_path = /obj/item/ai_module/core/full/colony_guide
+	category = list(
+		RND_CATEGORY_AI + RND_SUBCATEGORY_AI_CORE_MODULES
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE

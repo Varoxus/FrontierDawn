@@ -19,10 +19,10 @@ $include auxtools.txt
 # There are various options which are hard-locked for security reasons.
 
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
-# SERVERNAME tgstation
+SERVERNAME Fronter Station
 
 ## Server tagline: This will appear right below the server's title.
-# SERVERTAGLINE A generic TG-based server
+SERVERTAGLINE A rimworld-esque server currently in testing.
 
 ## Discord Link: This is the link to Nova Sector's discord server
 # DISCORD_LINK https://discord.gg/novasector
@@ -31,7 +31,7 @@ $include auxtools.txt
 # SERVERSQLNAME tgstation
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
-STATIONNAME Space Station 13
+STATIONNAME FCV Homeward
 
 ## Put on byond hub: Uncomment this to put your server on the byond hub.
 #HUB
@@ -43,7 +43,7 @@ STATIONNAME Space Station 13
 LOBBY_COUNTDOWN 120
 
 ## Round End Time: This is the amount of time after the round ends that players have to murder death kill each other.
-ROUND_END_COUNTDOWN 90
+ROUND_END_COUNTDOWN 120
 
 ## Comment this out if you want to use the SQL based admin system, the legacy system uses admins.txt.
 ## You need to set up your database to use the SQL based system.
@@ -51,10 +51,10 @@ ROUND_END_COUNTDOWN 90
 ADMIN_LEGACY_SYSTEM
 
 ##Uncomment this to stop any admins loaded by the legacy system from having their rank edited by the permissions panel
-#PROTECT_LEGACY_ADMINS
+PROTECT_LEGACY_ADMINS
 
 ##Uncomment this to stop any ranks loaded by the legacy system from having their flags edited by the permissions panel
-#PROTECT_LEGACY_RANKS
+PROTECT_LEGACY_RANKS
 
 ##Uncomment this to have admin ranks only loaded from the legacy admin_ranks.txt
 ##If enabled, each time admins are loaded ranks the database will be updated with the current ranks and their flags
@@ -110,7 +110,7 @@ ALLOW_ADMIN_OOCCOLOR
 ALLOW_ADMIN_ASAYCOLOR
 
 ## Job slot open/close by identification consoles delay in seconds
-ID_CONSOLE_JOBSLOT_DELAY 30
+ID_CONSOLE_JOBSLOT_DELAY 10
 
 ## allow players to initiate a restart vote
 #ALLOW_VOTE_RESTART
@@ -140,7 +140,7 @@ VOTE_PERIOD 600
 ## 0 = Cannot respawn (default)
 ## 1 = Can respawn
 ## 2 = Can respawn if choosing a different character
-ALLOW_RESPAWN 0
+ALLOW_RESPAWN 1
 
 ## Respawn delay (deciseconds), which doesn't allow to return to lobby
 RESPAWN_DELAY 0
@@ -227,7 +227,7 @@ IPINTEL_REJECT_BAD
 # INVOKE_YOUTUBEDL youtube-dl
 
 ## Comment this out to disable users ability to use the request internet sounds to be played.
-REQUEST_INTERNET_SOUND
+# REQUEST_INTERNET_SOUND
 
 ## Request Internet Sound Allowed URL'S comma separated, urls here are the only sites allowed through Request Internet Sound, Add more to allow more, or remove to disallow.
 ## The Defaults here are all supported by youtube-dl
@@ -245,7 +245,7 @@ REQUEST_INTERNET_ALLOWED youtube\.com\/watch?v=,youtu\.be\/,soundcloud\.com\/,ba
 ## Uncomment this to forbid admins from possessing the singularity.
 ## It is intentional that Admins can edit this config, as its meant to serve as a deterrent/warning for admin abuse.
 ## Add a `@` in front to lock admins from editing this.
-#FORBID_SINGULO_POSSESSION
+FORBID_SINGULO_POSSESSION
 
 ## Uncomment to give admins the ability to send a maptext popup to players.
 ## Only fires when an admin requests it, not every ahelp.
@@ -271,13 +271,13 @@ TICKLAG 0.5
 #AUTOMUTE_ON
 
 ## Uncomment this to let players see their own notes (they can still be set by admins only)
-#SEE_OWN_NOTES
+SEE_OWN_NOTES
 
 ### Comment these two out to prevent notes fading out over time for admins.
 ## Notes older then this will start fading out.
-NOTE_FRESH_DAYS 91.31055
+#NOTE_FRESH_DAYS 91.31055
 ## Notes older then this will be completely faded out.
-NOTE_STALE_DAYS 365.2422
+#NOTE_STALE_DAYS 365.2422
 
 ## Uncomment to allow drastic performence enhancemet measures to turn on automatically once there are equal or more clients than the configured amount (will also prompt admin for veto)
 #AUTO_LAG_SWITCH_POP 75
@@ -343,7 +343,7 @@ NOTIFY_NEW_PLAYER_ACCOUNT_AGE 1
 #PANIC_SERVER_NAME [Put the name here]
 
 ## Uncomment to have the changelog file automatically open when a user connects and hasn't seen the latest changelog
-#AGGRESSIVE_CHANGELOG
+AGGRESSIVE_CHANGELOG
 
 ## Comment this out if you've used the mass conversion sql proc for notes or want to stop converting notes
 AUTOCONVERT_NOTES
@@ -352,7 +352,7 @@ AUTOCONVERT_NOTES
 ANNOUNCE_ADMIN_LOGOUT
 
 ## Uncomment to have an admin message sent anytime an admin connects to a round in play, you can edit the messages in admin.dm
-#ANNOUNCE_ADMIN_LOGIN
+ANNOUNCE_ADMIN_LOGIN
 
 ## Map rotation
 ## You should edit maps.txt to match your configuration when you enable this.

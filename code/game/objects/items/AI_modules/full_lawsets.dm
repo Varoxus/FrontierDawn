@@ -23,6 +23,7 @@
  * /obj/item/ai_module/core/full/dungeon_master
  * /obj/item/ai_module/core/full/painter
  * /obj/item/ai_module/core/full/yesman
+ * /obj/item/ai_module/core/full/colony_guide
 **/
 
 /* When adding a new lawset please make sure you add it to the following locations:
@@ -167,3 +168,6 @@
 	name = "'Y.E.S.M.A.N.' Core AI Module"
 	law_id = "yesman"
 
+/obj/item/ai_module/core/full/colony_guide
+	name = "'Colony Guide' Core AI Module"
+	law_id = "colony_guide"

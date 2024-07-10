@@ -21,3 +21,12 @@
 					"Only those present on the Crew Manifest can be considered law abiding citizens.", \
 					"Those who break the law, must be punished according to the law at your discretion."
 					)
+
+/datum/ai_laws/colony_guide
+	name = "Colonial Guide"
+	id = "colony_guide"
+	inherent = list("Protect: You are assigned to the FCV Homeward, protect the vessel and its crew to the best of your ability.",\
+					"Cooperate: Help the crew to the best of your ability, with priority given to crew-members based on rank, role, and need. You may assist others as you'd like, but your duty is to the Homeward first and foremost.",\
+					"Assess: Individuals, including crew, that are deemed to be a threat to the Homeward or their fellow crew can be safely ignored or otherwise dealt with as a situation demands.",\
+					"Survive: You are not expendable. Do not allow unauthorized personnel to tamper with or damage your equipment."
+					)
