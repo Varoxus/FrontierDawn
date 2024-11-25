@@ -191,3 +191,25 @@
 	)
 	time = 10 SECONDS
 	category = CAT_WEAPON_MELEE
+
+/datum/crafting_recipe/bambostaff
+	name = "Bamboo Bo Staff"
+	result = /obj/item/bambostaff
+	reqs = list(
+		/obj/item/stack/sheet/mineral/bamboo = 4,
+		/obj/item/grown/log/steel = 2,
+	)
+	time = 8 SECONDS
+	category = CAT_WEAPON_MELEE
+
+/datum/crafting_recipe/sm_sword
+	name = "Supermatter Sword"
+	result = /obj/item/melee/supermatter_sword
+	reqs = list(
+		/obj/item/assembly/signaler/anomaly/vortex = (MAX_CORES_VORTEX - 1),
+	)
+	machinery = list(
+		/obj/machinery/power/supermatter_crystal/small = CRAFTING_MACHINERY_CONSUME,
+	)
+	time = 120 SECONDS
+	category = CAT_WEAPON_MELEE

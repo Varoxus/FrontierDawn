@@ -108,3 +108,19 @@ export const sound_achievement: FeatureChoiced = {
   `,
   component: FeatureDropdownInput,
 };
+
+export const sound_radio_noise: FeatureToggle = {
+  name: 'Enable radio noise',
+  category: 'SOUND',
+  description:
+    'When enabled, hear sounds of talking and hearing radio chatter.',
+  component: CheckboxInput,
+};
+
+export const sound_ai_vox: FeatureToggle = {
+  name: 'Enable AI VOX announcements',
+  category: 'SOUND',
+  description:
+    'When enabled, hear vocal AI announcements (also known as "VOX").',
+  component: CheckboxInput,
+};

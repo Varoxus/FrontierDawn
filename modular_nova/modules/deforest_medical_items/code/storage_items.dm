@@ -137,6 +137,7 @@
 	lefthand_file = 'modular_nova/modules/deforest_medical_items/icons/inhands/cases_lefthand.dmi'
 	righthand_file = 'modular_nova/modules/deforest_medical_items/icons/inhands/cases_righthand.dmi'
 	inhand_icon_state = "frontier"
+	worn_icon_state = "frontier"
 	worn_icon = 'modular_nova/modules/deforest_medical_items/icons/worn/worn.dmi'
 	worn_icon_teshari = 'modular_nova/modules/deforest_medical_items/icons/worn/worn_teshari.dmi'
 	pickup_sound = 'sound/items/handling/cloth_pickup.ogg'
@@ -334,6 +335,7 @@
 	. = ..()
 
 	can_hold = typecacheof(list(
+		/obj/item/autopsy_scanner,
 		/obj/item/blood_filter,
 		/obj/item/bonesetter,
 		/obj/item/cautery,
@@ -420,7 +422,7 @@
 		/obj/item/scalpel = 1,
 		/obj/item/hemostat = 1,
 		/obj/item/retractor = 1,
-		/obj/item/circular_saw/field_medic = 1,
+		/obj/item/circular_saw/field_medic/lowforce = 1,
 		/obj/item/bonesetter = 1,
 		/obj/item/cautery = 1,
 		/obj/item/surgical_drapes = 1,

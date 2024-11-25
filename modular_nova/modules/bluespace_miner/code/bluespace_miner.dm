@@ -102,7 +102,7 @@
 		update_appearance()
 	// Check if it is nonzero
 	if(mining_stat)
-		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, FALSE, SILENCED_SOUND_EXTRARANGE, ignore_walls = FALSE)
+		playsound(src, 'sound/machines/buzz/buzz-sigh.ogg', 50, FALSE, SILENCED_SOUND_EXTRARANGE, ignore_walls = FALSE)
 		return FALSE
 	// mining_stat = 0, we are ready to go
 	return TRUE
@@ -119,10 +119,10 @@
 		if(bs_miner != src)
 			mining_stat = mining_stat | BLUESPACE_MINER_TOO_CLOSE
 			return // This is allmighty
-	// if its hotter than (or equal to) room temp, don't work
+	// if it's hotter than (or equal to) room temp, don't work
 	if(environment.temperature >= T20C)
 		mining_stat = mining_stat | BLUESPACE_MINER_TOO_HOT
-	// if its lesser than(or equal to) normal pressure, don't work. Same goes for over(or equal to) 150% pressure
+	// if it's lesser than(or equal to) normal pressure, don't work. Same goes for over(or equal to) 150% pressure
 	if(environment.return_pressure() <= ONE_ATMOSPHERE)
 		mining_stat = mining_stat | BLUESPACE_MINER_LOW_PRESSURE
 	else if(environment.return_pressure() >= (ONE_ATMOSPHERE * 1.5))

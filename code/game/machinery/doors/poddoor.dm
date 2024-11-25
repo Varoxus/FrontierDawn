@@ -211,18 +211,42 @@
 		return FALSE
 	return ..()
 
-/obj/machinery/door/poddoor/do_animate(animation)
-	switch(animation)
-		if("opening")
-			flick("opening", src)
-			playsound(src, animation_sound, 50, TRUE)
-		if("closing")
-			flick("closing", src)
-			playsound(src, animation_sound, 50, TRUE)
-
 /obj/machinery/door/poddoor/update_icon_state()
 	. = ..()
-	icon_state = density ? "closed" : "open"
+	switch(animation)
+		if(DOOR_OPENING_ANIMATION)
+			icon_state = "opening"
+		if(DOOR_CLOSING_ANIMATION)
+			icon_state = "closing"
+		if(DOOR_DENY_ANIMATION)
+			icon_state = "deny"
+		else
+			icon_state = density ? "closed" : "open"
+
+/obj/machinery/door/poddoor/animation_length(animation)
+	switch(animation)
+		if(DOOR_OPENING_ANIMATION)
+			return 1.1 SECONDS
+		if(DOOR_CLOSING_ANIMATION)
+			return 1.1 SECONDS
+
+/obj/machinery/door/poddoor/animation_segment_delay(animation)
+	switch(animation)
+		if(DOOR_OPENING_PASSABLE)
+			return 0.5 SECONDS
+		if(DOOR_OPENING_FINISHED)
+			return 1.1 SECONDS
+		if(DOOR_CLOSING_UNPASSABLE)
+			return 0.2 SECONDS
+		if(DOOR_CLOSING_FINISHED)
+			return 1.1 SECONDS
+
+/obj/machinery/door/poddoor/animation_effects(animation)
+	switch(animation)
+		if(DOOR_OPENING_ANIMATION)
+			playsound(src, animation_sound, 50, TRUE)
+		if(DOOR_CLOSING_ANIMATION)
+			playsound(src, animation_sound, 50, TRUE)
 
 /obj/machinery/door/poddoor/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
 	if(density & !(resistance_flags & INDESTRUCTIBLE))
@@ -230,7 +254,7 @@
 		user.visible_message(span_warning("[user] begins prying open [src]."),\
 					span_noticealien("You begin digging your claws into [src] with all your might!"),\
 					span_warning("You hear groaning metal..."))
-		playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE)
+		playsound(src, 'sound/machines/airlock/airlock_alien_prying.ogg', 100, TRUE)
 
 		var/time_to_open = 5 SECONDS
 		if(hasPower())

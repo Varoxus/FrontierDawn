@@ -12,28 +12,28 @@
 	icon_state = "tongue"
 	modifies_speech = TRUE
 
-/obj/item/organ/internal/tongue/dog/Insert(mob/living/carbon/signer, special = FALSE, movement_flags = DELETE_IF_REPLACED)
+/obj/item/organ/internal/tongue/dog/mob_insert(mob/living/carbon/signer, special = FALSE, movement_flags = DELETE_IF_REPLACED)
 	. = ..()
 	signer.verb_ask = "arfs"
 	signer.verb_exclaim = "wans"
 	signer.verb_whisper = "whimpers"
 	signer.verb_yell = "barks"
 
-/obj/item/organ/internal/tongue/dog/Remove(mob/living/carbon/speaker, special = FALSE)
+/obj/item/organ/internal/tongue/dog/mob_remove(mob/living/carbon/speaker, special = FALSE)
 	. = ..()
 	speaker.verb_ask = initial(verb_ask)
 	speaker.verb_exclaim = initial(verb_exclaim)
 	speaker.verb_whisper = initial(verb_whisper)
 	speaker.verb_yell = initial(verb_yell)
 
-/obj/item/organ/internal/tongue/cat/Insert(mob/living/carbon/signer, special = FALSE, movement_flags = DELETE_IF_REPLACED)
+/obj/item/organ/internal/tongue/cat/mob_insert(mob/living/carbon/signer, special = FALSE, movement_flags = DELETE_IF_REPLACED)
 	. = ..()
 	signer.verb_ask = "mrrps"
 	signer.verb_exclaim = "mrrowls"
 	signer.verb_whisper = "purrs"
 	signer.verb_yell = "yowls"
 
-/obj/item/organ/internal/tongue/cat/Remove(mob/living/carbon/speaker, special = FALSE)
+/obj/item/organ/internal/tongue/cat/mob_remove(mob/living/carbon/speaker, special = FALSE)
 	. = ..()
 	speaker.verb_ask = initial(verb_ask)
 	speaker.verb_exclaim = initial(verb_exclaim)
@@ -47,14 +47,14 @@
 	icon_state = "tongue"
 	modifies_speech = TRUE
 
-/obj/item/organ/internal/tongue/avian/Insert(mob/living/carbon/signer, special = FALSE, movement_flags = DELETE_IF_REPLACED)
+/obj/item/organ/internal/tongue/avian/mob_insert(mob/living/carbon/signer, special = FALSE, movement_flags = DELETE_IF_REPLACED)
 	. = ..()
 	signer.verb_ask = "peeps"
 	signer.verb_exclaim = "squawks"
 	signer.verb_whisper = "murmurs"
 	signer.verb_yell = "shrieks"
 
-/obj/item/organ/internal/tongue/avian/Remove(mob/living/carbon/speaker, special = FALSE)
+/obj/item/organ/internal/tongue/avian/mob_remove(mob/living/carbon/speaker, special = FALSE)
 	. = ..()
 	speaker.verb_ask = initial(verb_ask)
 	speaker.verb_exclaim = initial(verb_exclaim)
@@ -78,6 +78,7 @@
 	taste_sensitivity = 25 // not as good as an organic tongue
 	liked_foodtypes = NONE
 	disliked_foodtypes = NONE
+	organ_traits = list(TRAIT_SILICON_EMOTES_ALLOWED)
 	voice_filter = "alimiter=0.9,acompressor=threshold=0.2:ratio=20:attack=10:release=50:makeup=2,highpass=f=1000"
 
 /obj/item/organ/internal/tongue/lizard/robot/can_speak_language(language)

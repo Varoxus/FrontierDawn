@@ -25,10 +25,6 @@
 			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR * seconds_per_tick)
 			blood_volume = min(blood_volume + (BLOOD_REGEN_FACTOR * nutrition_ratio * seconds_per_tick), BLOOD_VOLUME_NORMAL)
 
-	// Some effects are halved mid-combat.
-	var/determined_mod = has_status_effect(/datum/status_effect/determined) ? 0.5 : 0
-
-
 	//Bloodloss from wounds
 	var/temp_bleed = 0
 	for(var/obj/item/bodypart/iter_part as anything in bodyparts)
@@ -45,6 +41,10 @@
 	//Effects of bloodloss
 	if(sigreturn & HANDLE_BLOOD_NO_OXYLOSS)
 		return
+
+	// Some effects are halved mid-combat.
+	var/determined_mod = has_status_effect(/datum/status_effect/determined) ? 0.5 : 0
+
 	var/word = pick("dizzy","woozy","faint")
 	switch(blood_volume)
 		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
@@ -105,11 +105,12 @@
 
 	// Blood ratio! if you have 280 blood, this equals 0.5 as that's half of the current value, 560.
 	var/effective_blood_ratio = blood_volume / BLOOD_VOLUME_NORMAL
+	var/target_oxyloss = max((1 - effective_blood_ratio) * 100, 0)
 
 	// If your ratio is less than one (you're missing any blood) and your oxyloss is under missing blood %, start getting oxy damage.
 	// This damage accrues faster the less blood you have.
-	// If KO or in hardcrit, the damage accrues even then to prevent being perma-KO.
-	if(((effective_blood_ratio < 1) && (getOxyLoss() < ((1 - effective_blood_ratio) * 100))) || (stat in list(UNCONSCIOUS, HARD_CRIT)))
+	// If the damage surpasses the KO threshold for oxyloss, then we'll always tick up so you die eventually
+	if(target_oxyloss > 0 && (getOxyLoss() < target_oxyloss || (target_oxyloss >= OXYLOSS_PASSOUT_THRESHOLD && stat >= UNCONSCIOUS)))
 		// At roughly half blood this equals to 3 oxyloss per tick. At 90% blood it's close to 0.5
 		var/rounded_oxyloss = round(0.01 * (BLOOD_VOLUME_NORMAL - blood_volume), 0.25) * seconds_per_tick
 		adjustOxyLoss(rounded_oxyloss, updating_health = TRUE)
@@ -121,7 +122,7 @@
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/proc/bleed(amt)
-	if(!blood_volume || (status_flags & GODMODE))
+	if(!blood_volume || HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	blood_volume = max(blood_volume - amt, 0)
 
@@ -360,7 +361,7 @@
 
 //to add a splatter of blood or other mob liquid.
 /mob/living/proc/add_splatter_floor(turf/T, small_drip)
-	if(get_blood_id() != /datum/reagent/blood)
+	if(!(get_blood_id() in list(/datum/reagent/blood, /datum/reagent/toxin/acid))) // NOVA EDIT CHANGE START - ORIGINAL: if(get_blood_id() != /datum/reagent/blood)
 		return
 	if(!T)
 		T = get_turf(src)
@@ -381,14 +382,24 @@
 				temp_blood_DNA = GET_ATOM_BLOOD_DNA(drop) //we transfer the dna from the drip to the splatter
 				qdel(drop)//the drip is replaced by a bigger splatter
 		else
-			drop = new(T, get_static_viruses())
+			// NOVA EDIT CHANGE START - ORIGINAL: drop = new(T, get_static_viruses())
+			if(get_blood_id() == /datum/reagent/toxin/acid)
+				drop = new /obj/effect/decal/cleanable/blood/drip/xenoblood(T, get_static_viruses())
+			else
+				drop = new(T, get_static_viruses())
+			// NOVA EDIT END
 			drop.transfer_mob_blood_dna(src)
 			return
 
 	// Find a blood decal or create a new one.
-	var/obj/effect/decal/cleanable/blood/B = locate() in T
+	var/obj/effect/decal/cleanable/B = locate() in T // NOVA EDIT - ORIGINAL: var/obj/effect/decal/cleanable/blood/B = locate() in T
 	if(!B)
-		B = new /obj/effect/decal/cleanable/blood/splatter(T, get_static_viruses())
+		// NOVA EDIT CHANGE START - ORIGINAL: B = new /obj/effect/decal/cleanable/blood/splatter(T, get_static_viruses())
+		if(get_blood_id() == /datum/reagent/toxin/acid)
+			B = new /obj/effect/decal/cleanable/xenoblood/xsplatter(T, get_static_viruses())
+		else
+			B = new /obj/effect/decal/cleanable/blood/splatter(T, get_static_viruses())
+		// NOVA EDIT END
 	if(QDELETED(B)) //Give it up
 		return
 	B.bloodiness = min((B.bloodiness + BLOOD_AMOUNT_PER_DECAL), BLOOD_POOL_MAX)

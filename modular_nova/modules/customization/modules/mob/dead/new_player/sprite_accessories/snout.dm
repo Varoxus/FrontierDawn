@@ -30,7 +30,7 @@
 	return !sprite_datum.is_hidden(human)
 
 
-/obj/item/organ/external/snout/Insert(mob/living/carbon/receiver, special, movement_flags)
+/obj/item/organ/external/snout/mob_insert(mob/living/carbon/receiver, special, movement_flags)
 	if(sprite_accessory_flags & SPRITE_ACCESSORY_USE_MUZZLED_SPRITE)
 		external_bodyshapes |= BODYSHAPE_SNOUTED
 	if(sprite_accessory_flags & SPRITE_ACCESSORY_USE_ALT_FACEWEAR_LAYER)
@@ -53,7 +53,7 @@
 
 
 /datum/sprite_accessory/snouts/none
-	name = "None"
+	name = SPRITE_ACCESSORY_NONE
 	icon_state = "none"
 	flags_for_organ = NONE
 	factual = FALSE
@@ -115,6 +115,27 @@
 /datum/sprite_accessory/snouts/mammal/bug
 	name = "Bug"
 	icon_state = "bug"
+	flags_for_organ = NONE
+	color_src = USE_MATRIXED_COLORS
+	organ_type = /obj/item/organ/external/snout/top_adj
+
+/datum/sprite_accessory/snouts/mammal/bug_low_eyes
+	name = "Bug (Eyes Below Hair)"
+	icon_state = "bug_low_eyes"
+	flags_for_organ = NONE
+	color_src = USE_MATRIXED_COLORS
+	organ_type = /obj/item/organ/external/snout/top_adj
+
+/datum/sprite_accessory/snouts/mammal/bug_no_ant
+	name = "Bug (No Antennae, Below Hair)"
+	icon_state = "bug_no_ant"
+	flags_for_organ = NONE
+	color_src = USE_MATRIXED_COLORS
+	organ_type = /obj/item/organ/external/snout/top_adj
+
+/datum/sprite_accessory/snouts/mammal/bug_no_ant_low_eyes
+	name = "Bug (No Antennae, Below Hair, Eyes Below Hair)"
+	icon_state = "bug_no_ant_low_eyes"
 	flags_for_organ = NONE
 	color_src = USE_MATRIXED_COLORS
 	organ_type = /obj/item/organ/external/snout/top_adj
@@ -211,6 +232,14 @@
 	name = "Scolipede"
 	icon_state = "pede"
 
+/datum/sprite_accessory/snouts/mammal/pig
+	name = "Porcine"
+	icon_state = "pig"
+
+/datum/sprite_accessory/snouts/mammal/pig/boar
+	name = "Porcine + Tusks"
+	icon_state = "boar"
+
 /datum/sprite_accessory/snouts/mammal/sergal
 	name = "Sergal"
 	icon_state = "sergal"
@@ -248,6 +277,10 @@
 /datum/sprite_accessory/snouts/mammal/redpandaalt
 	name = "WahCoon ALT"
 	icon_state = "wahalt"
+
+/datum/sprite_accessory/snouts/mammal/canine_alt
+	name = "Canine (Alt)"
+	icon_state = "caninealt"
 
 /******************************************
 **************** Snouts *******************

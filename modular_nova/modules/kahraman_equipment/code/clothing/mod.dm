@@ -1,4 +1,4 @@
-// Its modsuiting time
+// It's modsuiting time
 
 /datum/mod_theme/frontier_colonist
 	name = "frontier hazard protective"
@@ -33,7 +33,7 @@
 		/obj/item/tank/internals,
 		/obj/item/storage/belt/holster,
 		/obj/item/construction,
-		/obj/item/fireaxe,
+		/obj/item/fireaxe/metal_h2_axe,
 		/obj/item/pipe_dispenser,
 		/obj/item/storage/bag,
 		/obj/item/pickaxe,

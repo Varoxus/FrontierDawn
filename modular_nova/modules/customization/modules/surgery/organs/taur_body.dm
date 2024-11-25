@@ -102,7 +102,7 @@
 	return SSaccessories.sprite_accessories["taur"]
 
 
-/obj/item/organ/external/taur_body/Insert(mob/living/carbon/receiver, special, movement_flags)
+/obj/item/organ/external/taur_body/mob_insert(mob/living/carbon/receiver, special, movement_flags)
 	if(sprite_accessory_flags & SPRITE_ACCESSORY_HIDE_SHOES)
 		external_bodyshapes |= BODYSHAPE_HIDE_SHOES
 
@@ -116,8 +116,8 @@
 		new_right_leg = new /obj/item/bodypart/leg/right/taur()
 
 	if(organ_flags & ORGAN_ROBOTIC)
-		new_left_leg = new /obj/item/bodypart/leg/left/robot/synth/taur()
-		new_right_leg = new /obj/item/bodypart/leg/right/robot/synth/taur()
+		new_left_leg = new /obj/item/bodypart/leg/left/synth/taur()
+		new_right_leg = new /obj/item/bodypart/leg/right/synth/taur()
 
 	if (left_leg_name)
 		new_left_leg.name = left_leg_name + " (Left leg)"
@@ -127,21 +127,23 @@
 		new_right_leg.plaintext_zone = lowertext(new_right_leg.name)
 
 	new_left_leg.bodyshape |= external_bodyshapes
-	new_left_leg.replace_limb(receiver, TRUE)
 	if(old_left_leg)
-		old_left_leg.forceMove(src)
+		old_left_leg.drop_limb(special = TRUE, move_to_floor = FALSE)
+		old_left_leg.moveToNullspace()
+	new_left_leg.replace_limb(receiver, special = TRUE)
 	new_left_leg.bodytype |= BODYTYPE_TAUR
 
 	new_right_leg.bodyshape |= external_bodyshapes
-	new_right_leg.replace_limb(receiver, TRUE)
 	if(old_right_leg)
-		old_right_leg.forceMove(src)
+		old_right_leg.drop_limb(special = TRUE, move_to_floor = FALSE)
+		old_right_leg.moveToNullspace()
+	new_right_leg.replace_limb(receiver, special = TRUE)
 	new_right_leg.bodytype |= BODYTYPE_TAUR
 
 	return ..()
 
 
-/obj/item/organ/external/taur_body/Remove(mob/living/carbon/organ_owner, special, moving)
+/obj/item/organ/external/taur_body/mob_remove(mob/living/carbon/organ_owner, special, moving)
 	if(QDELETED(owner))
 		return ..()
 
@@ -149,23 +151,19 @@
 	var/obj/item/bodypart/leg/right/right_leg = organ_owner.get_bodypart(BODY_ZONE_R_LEG)
 
 	if(left_leg)
-		left_leg.drop_limb()
-
-		if(left_leg)
-			qdel(left_leg)
+		left_leg.drop_limb(special = TRUE, move_to_floor = FALSE)
+		qdel(left_leg)
 
 	if(right_leg)
-		right_leg.drop_limb()
-
-		if(right_leg)
-			qdel(right_leg)
+		right_leg.drop_limb(special = TRUE, move_to_floor = FALSE)
+		qdel(right_leg)
 
 	if(old_left_leg)
-		old_left_leg.replace_limb(organ_owner, TRUE)
+		old_left_leg.replace_limb(organ_owner, special = TRUE)
 		old_left_leg = null
 
 	if(old_right_leg)
-		old_right_leg.replace_limb(organ_owner, TRUE)
+		old_right_leg.replace_limb(organ_owner, special = TRUE)
 		old_right_leg = null
 
 	// We don't call `synchronize_bodytypes()` here, because it's already going to get called in the parent because `external_bodyshapes` has a value.
